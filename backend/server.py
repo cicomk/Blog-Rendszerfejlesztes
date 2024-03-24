@@ -22,5 +22,16 @@ def get_topics():
     topic_id = request.args.get('param')
     return topics.getTopics(topic_id)
 
+@app.route('/topics/type_id', methods=['GET'])
+def get_type():
+    type_id = request.args.get('type_id')
+    vissza = str()
+    print(vissza)
+    return topics.getType(type_id)
+
+@app.route('/topics/types', methods=['GET'])
+def get_types():
+    return topics.getTypes()
+
 if __name__ == '__main__':
     app.run(debug=False)

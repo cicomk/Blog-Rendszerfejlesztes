@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
-<body onload="list();">
+<body onload="start();">
     <h1>Blog</h1>
     <div class="nav">
-        <button onclick="list()">Minden</button>
-        <button onclick="list('Utazás')">Utazás</button>
-
+        <select name="category" id="category" onchange="list(this.value)">
+            <option value=''>Minden</option>
+        </select>
         <br>
         <a href="addTopic.html"><button>Hozzáad</button></a>
     </div>

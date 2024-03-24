@@ -1,6 +1,6 @@
 function hozzaad(){
     var cim = document.getElementById('cim').value
-    var type = document.getElementById('type_id').value
+    var type = document.getElementById('category').value
     var szoveg = document.getElementById('szoveg').value
     let ujTema = {
         "name" : cim,
