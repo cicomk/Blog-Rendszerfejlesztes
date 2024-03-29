@@ -6,3 +6,11 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+.hozzaszolasok{
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto; 
+    border: 1px solid black;
+    background-color: rgb(189, 224, 255);
+    padding: 5px;
+}

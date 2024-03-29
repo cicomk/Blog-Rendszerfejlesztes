@@ -4,7 +4,6 @@ topics = [
     { "id" : "3", "name" : "Cím 3", "type_id" : "2", "description" : "Leírás"},
     { "id" : "4", "name" : "Cím 4", "type_id" : "3", "description" : "Leírás"},
     { "id" : "5", "name" : "Cím 5", "type_id" : "4", "description" : "Leírás"}
-
 ]
 
 topic_types = [
@@ -43,3 +42,10 @@ class Topics:
     
     def getTypes(self):
         return topic_types
+    
+    def getOne(self,id):
+        for i in topics:
+            if i["id"] == id:
+                return i
+        print("Nincs talalat")
+        return "404"

@@ -2,8 +2,12 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 from topics import *
+from comments import *
+
 
 topics = Topics()
+comments = Comments()
+
 
 app = Flask(__name__)
 CORS(app)
@@ -33,5 +37,28 @@ def get_type():
 def get_types():
     return topics.getTypes()
 
+@app.route('/topics/', methods=['GET'])
+def get_oneTopic():
+    topic_id = request.args.get('topic_id')
+    return topics.getOne(topic_id)
+
+
+#Comments:
+@app.route('/comment', methods=['GET'])
+def getComments():
+    topic_id = request.args.get('topic_id')
+    return comments.getComments(topic_id)
+
+@app.route('/comment/append', methods=['POST'])
+def appendComment():
+    new_commend = request.get_json()
+    print(new_commend)
+    return comments.newComment(new_commend)
+
+@app.route('/comment/sum', methods=['GET'])
+def sumComments():
+    topic_id = request.args.get('topic_id')
+    return comments.sumCommentsByTopic(topic_id)
+
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=False, port=5000)
