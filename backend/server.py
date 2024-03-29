@@ -3,11 +3,11 @@ from flask_cors import CORS
 
 from topics import *
 from comments import *
-
+from users import *
 
 topics = Topics()
 comments = Comments()
-
+users = User()
 
 app = Flask(__name__)
 CORS(app)
@@ -59,6 +59,13 @@ def appendComment():
 def sumComments():
     topic_id = request.args.get('topic_id')
     return comments.sumCommentsByTopic(topic_id)
+
+#Users
+@app.route('/users/getName', methods=['GET'])
+def getName():
+    user_id = request.args.get('user_id')
+    return users.getNameById(user_id)
+
 
 if __name__ == '__main__':
     app.run(debug=False, port=5000)

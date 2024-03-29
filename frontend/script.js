@@ -49,9 +49,9 @@ function getComments(id){
         } else {
         for (let i = 0; i < data.length; i++) {            
             let div = "<div id='h" + data[i].id + "'>";
-            div+="<b>user_id" + data[i].user_id + " hozzászólása:</b><p>" + data[i].body + "</p><i>" + data[i].timestamp +"</i><hr></div>";
+            div+="<b><p id='name" + data[i].user_id + "'> hozzászólása:</p></b><p>" + data[i].body + "</p><i>" + data[i].timestamp +"</i><hr></div>";
             document.getElementById('hozz'+ id).innerHTML+= div;
-            //getUserById();
+            getUserById(data[i].user_id);
         }
        
     }
@@ -60,6 +60,16 @@ function getComments(id){
     })
     .catch((error) => console.log('Hiba:', error));
 }
+
+function getUserById(user_id){
+    fetch('http://localhost:5000/users/getName?user_id='+user_id)
+    .then(response => response.text())
+    .then(data => { 
+        document.getElementById('name'+ user_id).innerHTML= data + " hozzászólása:";
+        document.getElementById('name'+ user_id).id = "user"+user_id;
+    })
+}
+
 
 function categoryList(){
     console.log("Loaded");
@@ -88,7 +98,7 @@ function commentForm(id){
     document.getElementById('commentF'+ id).innerHTML = '<label>Hozászólás: <input type="text" name="" id="hozzaszolasSzovege'+id+'"><button onclick="addComment('+id+',true)">Hozzáad</button>';
 }
 function addComment(id,hideElement=false){
-    var user_id = "11"
+    var user_id = "3"
     var topic_id = String(id)
     var body = document.getElementById('hozzaszolasSzovege'+id).value
     let ujKoment = {
