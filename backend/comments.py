@@ -2,7 +2,7 @@ comments = [
     {"id" : "1", "user_id":"1","topic_id":"1","body":"Nagyon jó","timestamp":"2024-03-29 12:20:07"},
     {"id" : "2", "user_id":"1","topic_id":"2","body":"Megesik","timestamp":"2024-02-18 12:20:07"},
     {"id" : "3", "user_id":"2","topic_id":"1","body":"Oszva és környéke","timestamp":"2024-03-16 12:20:07"},
-    {"id" : "4", "user_id":"2","topic_id":"1","body":"FELJELENTEM","timestamp":"2024-03-21 12:20:07"}
+    {"id" : "4", "user_id":"2","topic_id":"1","body":"Ez miez?","timestamp":"2024-03-21 12:20:07"}
 ]
 
 from datetime import datetime
