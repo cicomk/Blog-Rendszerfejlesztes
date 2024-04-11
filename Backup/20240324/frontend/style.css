@@ -1,0 +1,8 @@
+body {
+    font-family: Arial, sans-serif;
+}
+#message {
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
