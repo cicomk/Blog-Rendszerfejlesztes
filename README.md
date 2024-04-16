@@ -19,11 +19,15 @@ A backend részhez használt könyvtárak:
 - Flask
 - Flask_CORS
 - DateTime 
+- SQLAlchemy
+- MySQL Connector
 
 ```shell
     pip install flask
     pip install flask_cors
     pip install DateTime
+    pip install sqlalchemy
+    pip install mysql-connector-python
 ```
 
 ## Futtatás

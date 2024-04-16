@@ -1,6 +1,12 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
+#database
+from sqlalchemy import Column, Integer, String, create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+
+
 from topics import *
 from comments import *
 from users import *
