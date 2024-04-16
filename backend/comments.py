@@ -7,26 +7,63 @@ comments = [
 
 from datetime import datetime
 
+from sqlalchemy import Column, Integer, String, create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+import _mysql_connector
+from sqlalchemy.exc import SQLAlchemyError
 
+try:
+
+    engine = create_engine('mysql+mysqlconnector://root:@localhost/beadando')
+    Session = sessionmaker(bind=engine)
+    conn = engine.connect()
+    print("Sikeresen csatlakoztál az adatbázishoz!")
+except Exception as e:
+    print("Nem sikerült csatlakozni az adatbázishoz. A hiba oka:")
+    print(e)
+
+Base = declarative_base()
+
+class CommentModel(Base):
+    __tablename__ = 'comments'
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer)
+    topic_id = Column(Integer)
+    body = Column(String)
+    timestamp = Column(String)
+
+    def __init__(self, user_id, topic_id, body):
+        self.user_id = user_id
+        self.topic_id = topic_id
+        self.body = body
+        self.timestamp = datetime.now()
+
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 class Comments:
-        
+    def __init__(self):
+        self.session = Session()    
 
     def getComments(self, topic_id):
-        temp = []
-        for i in comments:
-            if i["topic_id"] == topic_id:
-                temp.append(i)
-        temp = sorted(temp, key=lambda x: x['timestamp'],reverse=True)
-        return temp
+        try:
+            comment_objects = self.session.query(CommentModel).filter_by(topic_id=topic_id).order_by(CommentModel.timestamp.desc()).all()
+            comments = [comment.to_dict() for comment in comment_objects]
+            self.session.close()
+            return comments
+        except Exception:
+            self.session.rollback()
+            raise
+
 
     def newComment(self, new_comment):
-        new_comment['id'] = str(len(comments)+1)
-        timestamp = datetime.now()
-        timenow = str(timestamp).split(".")[0]
-        new_comment['timestamp'] = timenow
-        comments.append(new_comment)
-        print(new_comment)
+        new_comment = CommentModel(user_id=new_comment['user_id'], topic_id=new_comment['topic_id'], body=new_comment['body'])
+        self.session.add(new_comment)
+        self.session.commit()
+        print(new_comment.to_dict())
+        self.session.close()
         return "OK"
     
     def sumCommentsByTopic(self, topic_id):
