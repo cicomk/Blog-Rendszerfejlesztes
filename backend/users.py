@@ -4,6 +4,8 @@ from sqlalchemy.ext.declarative import declarativebase
 
 Base = declarative_base()
 
+
+
 class User(Base):
     __tablename = 'users'
 
