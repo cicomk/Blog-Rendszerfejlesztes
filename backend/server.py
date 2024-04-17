@@ -13,7 +13,7 @@ from users import *
 
 topics = Topics()
 comments = Comments()
-users = User()
+users = UsersManager()
 
 app = Flask(__name__)
 CORS(app)

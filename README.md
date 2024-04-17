@@ -32,7 +32,7 @@ A backend részhez használt könyvtárak:
 
 ## Futtatás
 
-Futtatáshoz a *server.py*-t szükséges elindítani. A frontend kezdőoldala az *index.html*.
+Futtatáshoz a *server.py*-t szükséges elindítani. A frontend kezdőoldala az *index.html*. Adatbázis eléréséhez a XAMPP szükséges. Ezen belül a phpmyadmin és azon megtalálható *beadando* adatbázis. Jogosultak között kell szerepelnie egy *root* nevű felhasználónak jelszó nélkül, lokális eléréssel.
 
 Az API eléréséhez a szerverrel a kliens a
 ```url

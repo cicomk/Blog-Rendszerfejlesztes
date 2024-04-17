@@ -1,13 +1,22 @@
-from sqlalchemy import createengine, Column, Integer, String
+from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarativebase
+from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
+try:
+
+    engine = create_engine('mysql+mysqlconnector://root:@localhost/beadando')
+    Session = sessionmaker(bind=engine)
+    conn = engine.connect()
+    print("Sikeresen csatlakoztál az adatbázishoz!")
+except Exception as e:
+    print("Nem sikerült csatlakozni az adatbázishoz. A hiba oka:")
+    print(e)
 
 
 class User(Base):
-    __tablename = 'users'
+    __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
     username = Column(String(255))
@@ -15,9 +24,7 @@ class User(Base):
     password = Column(String(255))
 
 class UsersManager:
-    def init(self, connection_string):
-        self.engine = create_engine(connection_string)
-        Session = sessionmaker(bind=self.engine)
+    def __init__(self):
         self.session = Session()
 
     def add_user(self, user_data):
@@ -33,19 +40,16 @@ class UsersManager:
         else:
             return None
 
-
 users_data = [
     {"id": 1, "username": "randuser", "name": "RandomUser", "password": ""},
     {"id": 2, "username": "EricCartman", "name": "Eric Cartman", "password": ""},
     {"id": 3, "username": "LocalUser", "name": "LocalUser", "password": ""}
 ]
 
+# users_manager = UsersManager('mysql+mysqlconnector://root:@localhost/beadando')
+# for user_data in users_data:
+#     users_manager.add_user(user_data)
 
-users_manager = UsersManager('mysql+mysqlconnector://root:@localhost/beadando')
-for user_data in users_data:
-    users_manager.add_user(user_data)
-
-
-user_id = 2
-user_name = users_manager.getNameById(user_id)
-print(f"Name of user with ID {user_id}: {user_name}")
+# user_id = 2
+# user_name = Session.getNameById(user_id)
+# print(f"Name of user with ID {user_id}: {user_name}")
