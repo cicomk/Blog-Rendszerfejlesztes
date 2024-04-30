@@ -98,12 +98,12 @@
                 contentType: "application/json",
                 data: JSON.stringify({ "username": username, "password": password }),
                 success: function(response) {
-                    alert(response.message);
+                    alert(response);
                     if (response.message === "Sikeres bejelentkezés") {
                     }
                 },
                 error: function(xhr, status, error) {
-                    alert("Hiba: " + xhr.responseText);
+                    alert(response.message);
                 }
             });
         });

@@ -40,6 +40,24 @@ class UsersManager:
         else:
             return None
 
+    def getUserID(self, username, password):
+        user = self.session.query(User).filter_by(username=username, password=password).first()
+        if user:
+            return user.id
+        else:
+            return -1
+
+    def auth(self,data,jsonify):
+        username = data['username']
+        password = data['password']
+        return str(self.getUserID(username,password))
+    
+
+
+    
+    
+
+
 users_data = [
     {"id": 1, "username": "randuser", "name": "RandomUser", "password": ""},
     {"id": 2, "username": "EricCartman", "name": "Eric Cartman", "password": ""},

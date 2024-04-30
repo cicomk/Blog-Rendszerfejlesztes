@@ -75,13 +75,7 @@ def getName():
 @app.route('/auth', methods=['GET','POST'])
 def auth():
     data = request.get_json()
-    username = data['username']
-    password = data['password']
-
-    if username != "felhasznalonev" or password != "jelszo":
-        return jsonify({"message": "Hibás felhasználónév vagy jelszó"}), 401
-
-    return jsonify({"message": "Sikeres bejelentkezés"})
+    return users.auth(data,jsonify)
 
 
 if __name__ == '__main__':
