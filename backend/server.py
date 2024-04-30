@@ -72,6 +72,17 @@ def getName():
     user_id = request.args.get('user_id')
     return users.getNameById(user_id)
 
+@app.route('/auth', methods=['GET','POST'])
+def auth():
+    data = request.get_json()
+    username = data['username']
+    password = data['password']
+
+    if username != "felhasznalonev" or password != "jelszo":
+        return jsonify({"message": "Hibás felhasználónév vagy jelszó"}), 401
+
+    return jsonify({"message": "Sikeres bejelentkezés"})
+
 
 if __name__ == '__main__':
     app.run(debug=False, port=5000)
