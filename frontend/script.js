@@ -2,16 +2,34 @@ fetch('http://localhost:5000/api')
 .then(response => response.text())
 .then(data => {});
 
+var attempt = 0;
+
 function start(){
+    try {
+
+
     if (checkCookie() == '1'){
+        fetch('http://localhost:5000/users/getRole?id='+sessionStorage.getItem("id"))
+        .then(response => response.json())
+        .then(data => {
+            if (data == "1"){
+                document.getElementById("addButton").style.visibility = "visible";
+            }
+        })
         list();
         categoryList();
     } else {
         window.location.href = './login.html';
     }
 
+
+
+
+} catch (error) {
+    start()  
 }
 
+}
 function list(type_id = ''){
     
     fetch('http://localhost:5000/topics?param='+type_id)

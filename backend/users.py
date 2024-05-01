@@ -22,6 +22,8 @@ class User(Base):
     username = Column(String(255))
     name = Column(String(255))
     password = Column(String(255))
+    admin = Column(Integer)
+    
 
 class UsersManager:
     def __init__(self):
@@ -51,6 +53,15 @@ class UsersManager:
         username = data['username']
         password = data['password']
         return str(self.getUserID(username,password))
+    
+    def role(self, uid):
+        role = self.session.query(User).filter_by(id = uid).first()
+        if str(role.admin) == "1":
+           return "1"
+        else:
+            return "0"
+
+
     
 
 

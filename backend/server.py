@@ -55,6 +55,7 @@ def getComments():
     topic_id = request.args.get('topic_id')
     return comments.getComments(topic_id)
 
+
 @app.route('/comment/append', methods=['POST'])
 def appendComment():
     new_commend = request.get_json()
@@ -76,6 +77,11 @@ def getName():
 def auth():
     data = request.get_json()
     return users.auth(data,jsonify)
+
+@app.route('/users/getRole', methods=['GET'])
+def getRole():
+    id = request.args.get("id")
+    return users.role(id)
 
 
 if __name__ == '__main__':

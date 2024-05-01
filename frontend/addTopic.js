@@ -1,3 +1,19 @@
+function load(){
+    if (sessionStorage.getItem("id") != null){
+        fetch('http://localhost:5000/users/getRole?id='+sessionStorage.getItem("id"))
+        .then(response => response.json())
+        .then(data => {
+            if (data == "1"){
+            }else {
+                window.location.href = './login.html';
+            }
+        })
+    } else {
+        window.location.href = './login.html';
+    }
+
+}
+load();
 function hozzaad(){
     var cim = document.getElementById('cim').value
     var type = document.getElementById('category').value

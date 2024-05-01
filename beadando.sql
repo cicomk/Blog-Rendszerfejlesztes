@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Ápr 17. 22:24
+-- Létrehozás ideje: 2024. Máj 01. 23:58
 -- Kiszolgáló verziója: 10.4.27-MariaDB
 -- PHP verzió: 8.2.0
 
@@ -47,7 +47,14 @@ INSERT INTO `comments` (`id`, `user_id`, `topic_id`, `body`, `timestamp`) VALUES
 (5, 3, 1, 'asdadsdasd', '2024-04-16 23:54:31.195910'),
 (6, 3, 3, 'Szervuuusz', '2024-04-17 00:14:33.454661'),
 (7, 3, 1, 'dsd', '2024-04-17 22:23:52.944070'),
-(8, 3, 3, 'dsdsds', '2024-04-17 22:24:01.380339');
+(8, 3, 3, 'dsdsds', '2024-04-17 22:24:01.380339'),
+(9, 3, 3, 'Szia', '2024-04-30 22:02:27.407738'),
+(10, 3, 3, 'adasdasdas', '2024-04-30 22:02:42.038820'),
+(11, 1, 3, 'asd', ''),
+(12, 3, 2, '123123', '2024-05-01 20:54:45.944899'),
+(13, 1, 1, '123', '2024-05-01 21:05:04.450322'),
+(14, 4, 2, 'asdasdasdas', '2024-05-01 21:07:42.509345'),
+(15, 4, 4, 'Szia Bajusz', '2024-05-01 21:08:17.015871');
 
 -- --------------------------------------------------------
 
@@ -102,17 +109,19 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(100) NOT NULL,
+  `admin` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- A tábla adatainak kiíratása `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `name`, `password`) VALUES
-(1, 'randuser', 'RandomUser', ''),
-(2, 'EricCartman', 'Eric Cartman', ''),
-(3, 'LocalUser', 'LocalUser', '');
+INSERT INTO `users` (`id`, `username`, `name`, `password`, `admin`) VALUES
+(1, 'randuser', 'RandomUser', '1234', 0),
+(2, 'EricCartman', 'Eric Cartman', '1234', 0),
+(3, 'LocalUser', 'LocalUser', '1234', 0),
+(4, 'admin', 'Koppány', '1234', 1);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -150,7 +159,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT a táblához `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT a táblához `topics`
@@ -162,7 +171,7 @@ ALTER TABLE `topics`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

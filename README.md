@@ -39,3 +39,5 @@ Az API eléréséhez a szerverrel a kliens a
     http://127.0.0.1:5000
 ```
 címen kommunikál.
+
+Admin szerepköre az *admin* felhasználónak van. Jelszava: *1234*
