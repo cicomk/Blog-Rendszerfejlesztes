@@ -3,8 +3,13 @@ fetch('http://localhost:5000/api')
 .then(data => {});
 
 function start(){
-    list();
-    categoryList();
+    if (checkCookie() == '1'){
+        list();
+        categoryList();
+    } else {
+        window.location.href = './login.html';
+    }
+
 }
 
 function list(type_id = ''){
@@ -98,7 +103,7 @@ function commentForm(id){
     document.getElementById('commentF'+ id).innerHTML = '<label>Hozászólás: <input type="text" name="" id="hozzaszolasSzovege'+id+'"><button onclick="addComment('+id+',true)">Hozzáad</button>';
 }
 function addComment(id,hideElement=false){
-    var user_id = "3"
+    var user_id = sessionStorage.getItem("id");
     var topic_id = String(id)
     var body = document.getElementById('hozzaszolasSzovege'+id).value
     let ujKoment = {
@@ -121,4 +126,12 @@ function addComment(id,hideElement=false){
     .catch((error) => console.error('Hiba:', error));
     console.log(ujKoment);
 
+}
+
+function checkCookie(){
+    if (sessionStorage.getItem("id")==null){
+        return '0'
+    } else {
+        return '1'
+    }
 }
