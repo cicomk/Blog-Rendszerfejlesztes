@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bejelentkezés</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin-top: 100px;
+        }
+        .login-box {
+            width: 300px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .register-link {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #4caf50;
+        }
+    </style>
+</head>
+<body onload="sessionStorage.clear();">
+    <div class="login-box">
+        <form id="loginForm" method="post">
+            <input type="text" id="username" name="username" placeholder="Felhasználónév" required>
+            <br>
+            <input type="password" id="password" name="password" placeholder="Jelszó" required>
+            <br>
+            <input type="submit" value="Bejelentkezés">
+        </form>
+    </div>
+
+    <!-- <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            let user = {
+                "username" : username,
+                "password" : password
+            }
+
+            fetch('http://localhost:5000/auth', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+            })
+            .then(response => console.log(response))
+            .then(data => console.log(data))
+            .catch((error) => console.error('Hiba:', error));
+            event.preventDefault(); 
+            });
+           
+    </script> -->
+
+    
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#loginForm").submit(function(event) {
+            event.preventDefault(); 
+
+            var username = $("#username").val();
+            var password = $("#password").val();
+
+            $.ajax({
+                url: "http://localhost:5000/auth",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ "username": username, "password": password }),
+                success: function(response) {
+                    if (response != "-1"){
+                        if (setCookie(response) == "ok"){
+                            let lastname = sessionStorage.getItem("id");
+                            window.location.href = './index.html';
+                        }
+                    } else {
+                        sessionStorage.clear();
+                        alert("Hibás adatok!");
+                    }
+                   
+                },
+                error: function(xhr, status, error) {
+                    alert(response);
+                }
+            });
+        });
+    });
+
+    function setCookie(id){
+        sessionStorage.clear();
+        sessionStorage.setItem("id", id);
+        return "ok"
+    }
+</script>
+</body>
+</html>

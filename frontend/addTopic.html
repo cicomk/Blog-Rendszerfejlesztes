@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Random blog | Add topic</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="addTopic.js"></script>
+    <script src="script.js"></script>
+</head>
+<body onload="categoryList()">
+    <h1>Blog</h1>
+    <div class="nav">
+        <a href="index.html"><button>Vissza</button></a>
+    </div>
+    <div id="message">
+        <label>Cím: <input type="text" name="" id="cim"><br>
+        <label>Kategória: <select name="category" id="category" ></select><br>
+        <label>Leírás: <input type="text" name="" id="szoveg"><br>
+            <button onclick="hozzaad()">Hozzáad</button>
+    </div>
+</body>
+</html>
