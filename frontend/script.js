@@ -156,11 +156,3 @@ function checkCookie(){
 
 
 //Socketio
-
-var socket = io.connect('http://localhost:5000');
-socket.on('connect', function() {
-    socket.emit('message', 'User has connected!');
-});
-socket.on('respon', function(msg) {
-    console.log('Received message: ' + msg);
-});
