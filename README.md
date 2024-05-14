@@ -28,6 +28,8 @@ A backend részhez használt könyvtárak:
     pip install DateTime
     pip install sqlalchemy
     pip install mysql-connector-python
+    pip install flask_socketio eventlet
+
 ```
 
 ## Futtatás

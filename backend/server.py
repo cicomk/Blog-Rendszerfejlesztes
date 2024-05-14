@@ -1,5 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from flask_socketio import SocketIO, emit
+
+
 
 #database
 from sqlalchemy import Column, Integer, String, create_engine
@@ -17,6 +20,7 @@ users = UsersManager()
 
 app = Flask(__name__)
 CORS(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 @app.route('/api', methods=['GET'])
 def api():
@@ -84,5 +88,13 @@ def getRole():
     return users.role(id)
 
 
+
+@socketio.on('message')
+def handle_message(data):
+    print('received message: ' + data)
+    emit('respon', 'asd')
+
+
 if __name__ == '__main__':
-    app.run(debug=False, port=5000)
+    # app.run(debug=False, port=5000)
+    socketio.run(app, port=5000)
