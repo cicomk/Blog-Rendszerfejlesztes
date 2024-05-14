@@ -43,3 +43,5 @@ Az API eléréséhez a szerverrel a kliens a
 címen kommunikál.
 
 Admin szerepköre az *admin* felhasználónak van. Jelszava: *1234*
+
+Új cikk hozzáadásakor *alert* üzenet jelenik meg a felhasználónál.

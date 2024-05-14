@@ -92,8 +92,10 @@ except Exception as e:
 
 
 class Topics:
-    def __init__(self):
+    def __init__(self, SocketIO, emit):
         self.session = Session()
+        self.SocketIO = SocketIO
+        self.emit = emit
 
     def getTopics(self, topic_id=""):
         try:
@@ -113,6 +115,7 @@ class Topics:
         topic = Topic(**new_topic)
         self.session.add(topic)
         self.session.commit()
+        self.emit('newTopic', 'Uj cikk erheto el!', namespace='/', broadcast=True)
         return "ok"
 
     def getType(self, type_id=""):

@@ -8,11 +8,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.0/socket.io.js"></script>
     <script>
         var socket = io.connect('http://localhost:5000');
-        socket.on('connect', function() {
-            socket.emit('message', 'User has connected!');
-        });
-        socket.on('respon', function(msg) {
-            console.log('Received message: ' + msg);
+        socket.on('newTopic', function(msg) {
+            alert(msg);
         });
     </script>
 </head>

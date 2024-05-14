@@ -14,7 +14,7 @@ from topics import *
 from comments import *
 from users import *
 
-topics = Topics()
+topics = Topics(SocketIO, emit)
 comments = Comments()
 users = UsersManager()
 
